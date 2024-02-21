@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <BrowserName>Chrome</BrowserName>
+    <URL>https://m2i.co.in/survey/cpanel/login.php</URL>
+    <Users>
+        <User>
+            <Role>Super User</Role>
+            <Username>admin</Username>
+            <Password>deepakm2i@2018</Password>
+        </User>
+        <User>
+            <Role>Company User</Role>
+            <Username>9ankeshsharma@gmail.com</Username>
+            <Password>admin123</Password>
+        </User>
+    </Users>
+</Configuration>
