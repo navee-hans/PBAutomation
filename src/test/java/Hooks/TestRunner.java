@@ -10,6 +10,4 @@ import org.junit.runner.RunWith;
         glue = {"stepDefinition","Hooks"}
 )
 public class TestRunner {
-
-    
 }
