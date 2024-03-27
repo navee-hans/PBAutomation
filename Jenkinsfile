@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout source code from Git repository
-                git url: 'https://github.com/navee-hans/M2IAutomation.git'
+                sh 'git clone https://github.com/navee-hans/M2IAutomation.git'
             }
         }
 
