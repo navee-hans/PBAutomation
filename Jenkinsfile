@@ -6,12 +6,12 @@ agent {
        }
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout source code from Git repository
-                sh 'git clone https://github.com/navee-hans/M2IAutomation.git'
-            }
-        }
+//         stage('Checkout') {
+//             steps {
+//                 // Checkout source code from Git repository
+//                 sh 'git clone https://github.com/navee-hans/M2IAutomation.git'
+//             }
+//         }
 
         stage('Build') {
             steps {
