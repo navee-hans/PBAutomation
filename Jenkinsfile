@@ -40,7 +40,7 @@ agent {
     post {
         always {
             // Archive artifacts
-            cucumber(addTestResults: true, testResults: '**/target/cucumber-report.json')
+            cucumber 'reportDir=target', fileIncludePattern: '**/target/cucumber-report.json'
             //archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
