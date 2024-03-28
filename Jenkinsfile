@@ -1,6 +1,6 @@
 pipeline {
-    agent mylaptop{
-
+    agent{
+    node('mylaptop'){
     stages {
         stage('Checkout') {
             steps {
@@ -30,6 +30,7 @@ pipeline {
             }
         }
     }
+}
 
     post {
         always {
@@ -37,5 +38,4 @@ pipeline {
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
-    }
 }
