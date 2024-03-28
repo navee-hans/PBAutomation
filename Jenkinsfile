@@ -32,7 +32,7 @@ agent {
              // Generate HTML report from Cucumber JSON report using Cucumber Reports plugin
             cucumberReports(
                 fileIncludePattern: '**/target/cucumber-report.json',
-                trendsLimit: 10
+                trendsLimit: 10)
             }
         }
     }
