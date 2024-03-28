@@ -1,5 +1,5 @@
 pipeline {
-    agent mylaptop
+    agent mylaptop{
 
     stages {
         stage('Checkout') {
@@ -35,6 +35,7 @@ pipeline {
         always {
             // Archive artifacts
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
         }
     }
 }
