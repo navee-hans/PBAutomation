@@ -23,7 +23,7 @@ agent {
         stage('Cucumber Reports'){
          steps{
             cucumber buildStatus: "UNSTABLE",
-            fileIncludePattern: "**/cucumber.json",
+            fileIncludePattern: "**/cucumber-json-report.json",
             jsonReportDirectory: 'target'
          }
 
