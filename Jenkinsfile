@@ -3,7 +3,7 @@ agent {
         node {
             label 'localmachine'
         }
-    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -33,6 +33,7 @@ agent {
             }
         }
     }
+}
 
     post {
         always {
