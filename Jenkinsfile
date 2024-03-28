@@ -23,7 +23,7 @@ agent {
 
     post {
         always {
-             junit '**/target/cucumber-reports/*.xml'
+             junit '**/target/surefire-reports/*.xml'
         }
 
         }
