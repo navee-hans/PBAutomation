@@ -29,8 +29,10 @@ agent {
 
         stage('Publish Test Results') {
             steps {
-                // Publish Cucumber test reports
-                cucumber buildStatus: 'UNSTABLE', failedFeaturesNumber: 1, failedScenariosNumber: 1, skippedScenariosNumber: 1, unstableFeaturesNumber: 1, unstableScenariosNumber: 1
+             // Generate HTML report from Cucumber JSON report using Cucumber Reports plugin
+            cucumberReports(
+                fileIncludePattern: '**/target/cucumber-report.json',
+                trendsLimit: 10
             }
         }
     }
