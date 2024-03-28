@@ -41,6 +41,17 @@
       <version>7.14.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>net.masterthought</groupId>
+      <artifactId>cucumber-reporting</artifactId>
+      <version>5.6.0</version> <!-- Replace with the latest version -->
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>31.0.1-jre</version> <!-- or the latest version available -->
+    </dependency>
   </dependencies>
 
   <build>

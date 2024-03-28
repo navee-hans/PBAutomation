@@ -19,6 +19,15 @@ agent {
                 bat 'mvn clean test'
             }
         }
+
+        stage('Cucumber Reports'){
+         steps{
+            cucumber buildstatus: "UNSTABLE",
+            fileIncludePattern: "**/cucumber.json",
+            jsonReportDirectory: 'target'
+         }
+
+        }
     }
 
     post {
