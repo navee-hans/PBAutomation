@@ -13,38 +13,18 @@ agent {
             }
         }
 
-        stage('Build') {
+        stage('Build and test') {
             steps {
                 // Build the Maven project
-                bat 'mvn clean install -DskipTests=true'
+                bat 'mvn clean test'
             }
         }
-
-        stage('Test') {
-            steps {
-                // Run Cucumber tests
-                bat 'mvn test'
-            }
-        }
-
-//         stage('Publish Test Results') {
-//             steps {
-//              // Generate HTML report from Cucumber JSON report using Cucumber Reports plugin
-//             cucumberReports(
-//                 fileIncludePattern: '**/target/cucumber-report.json',
-//                 trendsLimit: 10)
-//             }
-//         }
     }
 
-//     post {
-//         //always {
-//             // Archive artifacts
-// //              cucumber(
-// //                            reportDir: 'target',
-// //                            fileIncludePattern: '**/target/cucumber-report.json'
-// //                        )
-//             //archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-//            // }
-//         }
+    post {
+        always {
+             junit '**/target/cucumber-reports/*.xml'
+        }
+
+        }
 }
