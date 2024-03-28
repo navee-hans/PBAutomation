@@ -37,14 +37,14 @@ agent {
 //         }
     }
 
-    post {
-        always {
-            // Archive artifacts
-//              cucumber(
-//                            reportDir: 'target',
-//                            fileIncludePattern: '**/target/cucumber-report.json'
-//                        )
-            //archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-            }
-        }
+//     post {
+//         //always {
+//             // Archive artifacts
+// //              cucumber(
+// //                            reportDir: 'target',
+// //                            fileIncludePattern: '**/target/cucumber-report.json'
+// //                        )
+//             //archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+//            // }
+//         }
 }
