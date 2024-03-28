@@ -36,7 +36,7 @@ agent {
                              body: "Attached is the test execution report.",
                              to: "9ankeshsharma@gmail.com", "naveehans@gmail.com",
                              attachLog: true
-                             )
+                             
         }
 
         }
