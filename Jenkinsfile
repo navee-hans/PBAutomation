@@ -6,24 +6,24 @@ agent {
        }
 
     stages {
-//         stage('Checkout') {
-//             steps {
-//                 // Checkout source code from Git repository
-//                 sh 'git clone https://github.com/navee-hans/M2IAutomation.git'
-//             }
-//         }
+        stage('Checkout') {
+            steps {
+                // Checkout source code from Git repository
+                bat 'git clone https://github.com/navee-hans/M2IAutomation.git'
+            }
+        }
 
         stage('Build') {
             steps {
                 // Build the Maven project
-                sh 'mvn clean install -DskipTests=true'
+                bat 'mvn clean install -DskipTests=true'
             }
         }
 
         stage('Test') {
             steps {
                 // Run Cucumber tests
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
