@@ -27,11 +27,11 @@ pipeline {
             steps {
                 // Publish Cucumber test reports
                 cucumber buildStatus: 'UNSTABLE', failedFeaturesNumber: 1, failedScenariosNumber: 1, skippedScenariosNumber: 1, unstableFeaturesNumber: 1, unstableScenariosNumber: 1
+                }
             }
         }
     }
 }
-
     post {
         always {
             // Archive artifacts
