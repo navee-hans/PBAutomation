@@ -32,7 +32,12 @@ agent {
 
     post {
         always {
-             junit '**/target/surefire-reports/*.xml'
+               emailext(
+                             subject: "Test Execution Report",
+                             body: "Attached is the test execution report.",
+                             to: "9ankeshsharma@gmail.com", "naveehans@gmail.com",
+                             attachLog: true
+                             )
         }
 
         }
