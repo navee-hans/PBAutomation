@@ -4,8 +4,6 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
-import static Hooks.TestRunner.getFeaturePath;
-
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/java/Feature",
@@ -13,9 +11,4 @@ import static Hooks.TestRunner.getFeaturePath;
         plugin = {"pretty", "html:target/cucumber-html-report", "json:target/cucumber-json-report.json"}
 )
 public class TestRunner {
-
-    public static String getFeaturePath() {
-        // Logic to determine feature path dynamically
-        return "src/test/java/features";
-    }
 }
