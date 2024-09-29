@@ -8,7 +8,7 @@ import java.text.Format;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "E:\\M2IAutomation\\src\\test\\java\\Feature",
+        features = System.getProperty("features.path", "src/test/java/Features"),
         glue = {"stepDefinition","Hooks",},
         plugin = {"pretty", "html:target/cucumber-html-report", "json:target/cucumber-json-report.json"}
 )
