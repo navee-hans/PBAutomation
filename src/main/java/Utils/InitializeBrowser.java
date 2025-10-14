@@ -8,34 +8,61 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.time.Duration;
 
-
 public class InitializeBrowser {
 
     private static WebDriver driver;
 
-    private InitializeBrowser(){
-
+    // Private constructor to prevent instantiation
+    private InitializeBrowser() {
     }
 
-    public static WebDriver getDriver(String browserName){
-        if(driver==null && browserName.equals("Chrome"))
-        {
-            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\Drivers\\chromedriver.exe");
-            driver = new ChromeDriver(BrowserHelpers.chromeOptions());
-        }else if(driver==null && browserName.equals("Firefox"))
-        {
-            driver = new FirefoxDriver(new FirefoxOptions(BrowserHelpers.firefoxOptions()));
+    /**
+     * Initialize WebDriver instance based on the browser name.
+     *
+     * @param browserName the name of the browser (e.g., "Chrome" or "Firefox")
+     * @return WebDriver instance
+     */
+    public static WebDriver getDriver(String browserName) {
+        if (driver == null) {
+            switch (browserName.toLowerCase()) {
+                case "chrome":
+                    driver = new ChromeDriver(BrowserHelpers.chromeOptions());
+                    break;
+
+                case "firefox":
+                    FirefoxOptions options = BrowserHelpers.firefoxOptions();
+                    driver = new FirefoxDriver(options);
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("Unsupported browser: " + browserName);
+            }
+
+            // Basic browser setup
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+            driver.manage().window().maximize();
+            driver.get(XMLFileUtility.getURL());
         }
-        driver.get(XMLFileUtility.getURL());
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
         return driver;
     }
 
-    public static WebDriver returnDriver(){
-        return  driver;
+    /**
+     * Return existing WebDriver instance.
+     */
+    public static WebDriver returnDriver() {
+        if (driver == null) {
+            throw new IllegalStateException("Driver not initialized. Call getDriver() first.");
+        }
+        return driver;
     }
 
-    public static void setDriverToNull(){
-        driver = null;
+    /**
+     * Cleanly close and quit the WebDriver instance.
+     */
+    public static void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
     }
 }

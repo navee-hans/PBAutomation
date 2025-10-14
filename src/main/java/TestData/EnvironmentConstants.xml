@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <BrowserName>Chrome</BrowserName>
-    <URL>https://m2i.co.in/survey/cpanel/login.php</URL>
+    <URL>https://test.pbweb.info/MicrosoftIdentity/Account/SignIn</URL>
     <Users>
         <User>
-            <Role>Super User</Role>
-            <Username>admin</Username>
-            <Password>deepakm2i@2018</Password>
+            <Role>Admin User</Role>
+            <Username>hansnavee1502@gmail.com</Username>
+            <Password>nh18Apr!</Password>
         </User>
         <User>
-            <Role>Company User</Role>
-            <Username>9ankeshsharma@gmail.com</Username>
-            <Password>admin123</Password>
+            <Role>Guest User</Role>
+            <Username>naveehans@gmail.com</Username>
+            <Password>nh18Apr!</Password>
         </User>
     </Users>
 </Configuration>

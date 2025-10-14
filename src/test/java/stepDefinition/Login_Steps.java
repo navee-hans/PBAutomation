@@ -2,34 +2,33 @@ package stepDefinition;
 
 
 
-import PageObjects.Pages.HomePage;
+import PageObjects.Pages.DashboardPage;
 import PageObjects.Pages.LoginPage;
 import Utils.InitializeBrowser;
 import Utils.XMLFileUtility;
-import Driver.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.sl.In;
 import org.junit.Assert;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Map;
 
 public class Login_Steps {
-    @Given("^I login with \\\"(.*)\\\"$")
-    public void given_i_login_with(String role) {
-         Map<String,String> user= XMLFileUtility.getUsers(role);
-         PageFactory pageFactory = new PageFactory();
+
+    @Given("I login with {string}")
+    public void iLoginWith(String role) {
+        Map<String,String> user= XMLFileUtility.getUsers(role);
+        PageFactory pageFactory = new PageFactory();
         LoginPage loginPage = new LoginPage(InitializeBrowser.returnDriver());
-        System.out.println(user.get("Username") + "------" +user.get("Password"));
+        System.out.println(user.get("Username"));
         loginPage.loginWithValidCredentials(user.get("Username"),user.get("Password"));
-
     }
 
-    @Then("I verify user navigate to homescreen")
-    public void i_verify_user_navigate_to_homescreen() {
-        HomePage homePage = new HomePage(InitializeBrowser.returnDriver());
-        Assert.assertTrue(homePage.getLoggedUserName().isDisplayed());
+    @Then("I verify user navigate to {string} Dashboard")
+    public void i_verify_user_navigate_to_homescreen(String role) {
+        DashboardPage dashBoardPage = new DashboardPage(InitializeBrowser.returnDriver());
+        if(role.equalsIgnoreCase("Guest"))
+            Assert.assertFalse(dashBoardPage.isSkipButtonDisplayed());
+        if(role.equalsIgnoreCase("Admin"))
+            Assert.assertTrue(dashBoardPage.isSkipButtonDisplayed());
     }
-
 }

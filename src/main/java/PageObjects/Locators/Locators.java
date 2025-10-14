@@ -5,15 +5,17 @@ public class Locators {
 
     public static class LoginPage{
 
-        public static String UserNameID = "txtUser";
-        public static String PasswordID = "txtPassword";
-        public static String LoginButtonID = "btnLogin";
+        public static String EmailByID = "email";
+        public static String PasswordByID = "password";
+        public static String SignInByID = "next";
 
     }
 
-    public static class HomePage{
+    public static class DashboardPage{
 
-        public static String LoggedUserNameXpath = "//a[@class='dropdown-toggle']";
+        public static String SkipButtonByXPATH = "//div[@class='contact-box maintextdiv skipBtn']";
+        public static String ContactUsButtonByXPATH = "//div[@class='contact-box maintextdiv contactBtn']";
 
     }
+
 }

@@ -1,107 +1,113 @@
-
 package Driver;
+
 import PageObjects.models.LocatorsType;
 import Utils.InitializeBrowser;
 import org.openqa.selenium.*;
 import java.util.List;
 
 public class Driver {
-    public static WebDriver driver = null;
 
-    public WebElement FindElement(LocatorsType locatorType, String locator){
-        WebElement element = null;
-        try {
-            if (locatorType == LocatorsType.ByXpath) {
-                element =  driver.findElement(By.xpath(locator));
-            }else if(locatorType == LocatorsType.ByID)
-            {
-                element = driver.findElement(By.id(locator));
-            }else if(locatorType == LocatorsType.ByClassName)
-            {
-                element = driver.findElement(By.className(locator));
-            }else if(locatorType == LocatorsType.ByName) {
-                element = driver.findElement(By.name(locator));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return element;
+    private final WebDriver driver;
+
+    // ✅ Constructor - makes driver instance final (no shared static)
+    public Driver(WebDriver driver) {
+        this.driver = driver;
     }
 
-    public List<WebElement> FindElements(LocatorsType locatorType, String locator){
-        List<WebElement> elements = null;
-        try {
-            if (locatorType == LocatorsType.ByXpath) {
-                elements =  driver.findElements(By.xpath(locator));
-            }else if(locatorType == LocatorsType.ByID)
-            {
-                elements = driver.findElements(By.id(locator));
-            }else if(locatorType == LocatorsType.ByClassName)
-            {
-                elements = driver.findElements(By.className(locator));
-            }else if(locatorType == LocatorsType.ByName) {
-                elements = driver.findElements(By.name(locator));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    // ✅ Unified private method to get By object based on LocatorsType
+    private By getBy(LocatorsType locatorType, String locator) {
+        switch (locatorType) {
+            case ByXpath:
+                return By.xpath(locator);
+            case ByID:
+                return By.id(locator);
+            case ByClassName:
+                return By.className(locator);
+            case ByName:
+                return By.name(locator);
+            default:
+                throw new IllegalArgumentException("Invalid locator type: " + locatorType);
         }
-        return elements;
     }
 
-    public void clickElement(By by){
+    // ✅ Find single element
+    public WebElement findElement(LocatorsType locatorType, String locator) {
+        try {
+            return driver.findElement(getBy(locatorType, locator));
+        } catch (NoSuchElementException e) {
+            System.err.println("❌ Element not found: " + locator);
+            throw e;
+        }
+    }
+
+    // ✅ Find multiple elements
+    public List<WebElement> findElements(LocatorsType locatorType, String locator) {
+        return driver.findElements(getBy(locatorType, locator));
+    }
+
+    // ✅ Generic click overloads
+    public void clickElement(By by) {
         driver.findElement(by).click();
     }
 
-    public void clickElement(WebElement element){
-        element.click();
-        WaitUntil wait = new WaitUntil();
-
+    public void clickElement(WebElement element) {
+        if (element != null && element.isDisplayed() && element.isEnabled()) {
+            element.click();
+        } else {
+            System.err.println("❌ Element not clickable: " + element);
+        }
     }
 
-    public void clickElement(LocatorsType locatorsType, String locator){
-        FindElement(locatorsType,locator).click();
+    public void clickElement(LocatorsType locatorType, String locator) {
+        clickElement(getBy(locatorType, locator));
     }
 
-    public void setTextWithPressEnterKey(By by, String text){
+    // ✅ Enter text
+    public void setText(By by, String text) {
         WebElement element = driver.findElement(by);
-       element.sendKeys(text);
-       element.sendKeys(Keys.ENTER);
+        element.clear();
+        element.sendKeys(text);
     }
 
-    public void setText(By by, String text){
-        driver.findElement(by).sendKeys(text);
+    public void setTextWithEnterKey(By by, String text) {
+        WebElement element = driver.findElement(by);
+        element.clear();
+        element.sendKeys(text, Keys.ENTER);
     }
 
-    public boolean isEnabled(By by){
+    // ✅ Element state checks
+    public boolean isEnabled(By by) {
         try {
-            if(driver.findElement(by).isEnabled())
-            {
-                return true;
-            }else{
-                return false;
-            }
-        }catch (Exception e) {
-        e.printStackTrace();
+            return driver.findElement(by).isEnabled();
+        } catch (NoSuchElementException e) {
+            return false;
         }
-        return true;
     }
 
-    public String getText(By by){
-        String text = "";
+    public boolean isDisplayed(By by) {
         try {
-            text = driver.findElement(by).getText();
-            return text;
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
+            return driver.findElement(by).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
         }
-        return text;
     }
 
-    public void closeCurrentBrowser(){
+    // ✅ Get element text safely
+    public String getText(By by) {
+        try {
+            return driver.findElement(by).getText().trim();
+        } catch (NoSuchElementException e) {
+            System.err.println("❌ Unable to get text: element not found - " + by);
+            return "";
+        }
+    }
+
+    // ✅ Browser close utilities
+    public void closeCurrentBrowser() {
         driver.close();
     }
 
-    public void closeAllBrowsers(){
+    public void closeAllBrowsers() {
         driver.quit();
     }
 }
