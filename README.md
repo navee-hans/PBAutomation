@@ -14,26 +14,37 @@ This is a **Cucumber + Java Selenium automation framework** designed for robust,
 ---
 
 ## Folder Structure
-
-src/
-├─ main/
-│ ├─ java/
-│ │ ├─ Driver/ # WebDriver wrapper, WaitUntil, and helper methods
-│ │ ├─ PageObjects/
-│ │ │ ├─ Locators/ # Element locators
-│ │ │ ├─ Models/ # Page models or data models
-│ │ │ └─ Pages/ # Page Object classes
-│ │ ├─ TestData/ # EnvironmentConstants.xml for URLs, credentials, configs
-│ │ └─ Utils/ # BrowserHelper, InitializeBrowser, XMLFileUtility
-└─ test/
-├─ java/
-│ ├─ features/ # Cucumber .feature files (e.g., login.feature)
-│ ├─ stepDefinition/ # Step definitions for feature files
-│ └─ Hooks/ # Hooks for setup/teardown, TestRunner class
-└─ resources/ # Optional resources like test data or reports
-
-
----
+- src/
+- ├─ main/
+- │ ├─ java/
+- │ │ ├─ Driver/ # WebDriver wrapper, WaitUntil, and helper methods
+- │ │ │ ├─ Driver.java
+- │ │ │ └─ WaitUntil.java
+- │ │ ├─ PageObjects/
+- │ │ │ ├─ Locators/ # Element locators
+- │ │ │ │ └─ LoginPageLocators.java
+- │ │ │ ├─ Models/ # Page models or data models
+- │ │ │ │ └─ UserModel.java
+- │ │ │ └─ Pages/ # Page Object classes
+- │ │ │ ├─ Pages.java
+- │ │ │ ├─ LoginPage.java
+- │ │ │ └─ DashboardPage.java
+- │ │ ├─ TestData/ # EnvironmentConstants.xml for URLs, credentials, configs
+- │ │ │ └─ EnvironmentConstants.xml
+- │ │ └─ Utils/ # BrowserHelper, InitializeBrowser, XMLFileUtility
+- │ │ ├─ BrowserHelper.java
+- │ │ ├─ InitializeBrowser.java
+- │ │ └─ XMLFileUtility.java
+- └─ test/
+- ├─ java/
+- │ ├─ features/ # Cucumber .feature files (e.g., login.feature)
+- │ │ └─ login.feature
+- │ ├─ stepDefinition/ # Step definitions for feature files
+- │ │ └─ login_stepdef.java
+- │ └─ Hooks/ # Hooks for setup/teardown, TestRunner class
+- │ ├─ PBHooks.java
+- │ └─ TestRunner.java
+- └─ resources/ # Optional resources like test data or reports
 
 ## Key Components
 
