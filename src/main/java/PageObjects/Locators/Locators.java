@@ -5,7 +5,7 @@ public class Locators {
 
     public static class LoginPage{
 
-        public static String EmailByID = "email";
+        public static String EmailByID = "emai";
         public static String PasswordByID = "password";
         public static String SignInByID = "next";
 

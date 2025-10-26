@@ -2,12 +2,13 @@ package PageObjects.Pages;
 
 import PageObjects.Locators.Locators;
 import PageObjects.models.LocatorsType;
+import Utils.AllureLogger;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LoginPage extends Pages {
 
-    // ✅ Define locators (not elements)
     private final LocatorsType EMAIL_TYPE = LocatorsType.ByID;
     private final String EMAIL_LOCATOR = Locators.LoginPage.EmailByID;
 
@@ -21,28 +22,35 @@ public class LoginPage extends Pages {
         super(driver);
     }
 
-    // ✅ Main method to perform login
     public void loginWithValidCredentials(String email, String password) {
-        try {
-            System.out.println("🔹 Attempting login with user: " + email);
+        Allure.step("🔹 Attempting login with user: " + email);
 
-            // Wait until elements visible and interact
-            WebElement emailField = wait.untilElementVisible(EMAIL_TYPE, EMAIL_LOCATOR);
-            emailField.clear();
-            emailField.sendKeys(email);
-
-            WebElement passwordField = wait.untilElementVisible(PASSWORD_TYPE, PASSWORD_LOCATOR);
-            passwordField.clear();
-            passwordField.sendKeys(password);
-
-            WebElement signInBtn = wait.untilElementClickable(SIGNIN_TYPE, SIGNIN_LOCATOR);
-            signInBtn.click();
-
-            System.out.println("✅ Login submitted successfully");
-
-        } catch (Exception e) {
-            System.err.println("❌ Login failed: " + e.getMessage());
-            e.printStackTrace();
+        WebElement emailField = wait.untilElementVisible(EMAIL_TYPE, EMAIL_LOCATOR);
+        if (emailField == null) {
+            AllureLogger.failStep("Email field not found", new Exception("Email field is null"));
+            return;
         }
+        emailField.clear();
+        emailField.sendKeys(email);
+        AllureLogger.passStep("Entered email successfully");
+
+        WebElement passwordField = wait.untilElementVisible(PASSWORD_TYPE, PASSWORD_LOCATOR);
+        if (passwordField == null) {
+            AllureLogger.failStep("Password field not found", new Exception("Password field is null"));
+            return;
+        }
+        passwordField.clear();
+        passwordField.sendKeys(password);
+        AllureLogger.passStep("Entered password successfully");
+
+        WebElement signInBtn = wait.untilElementClickable(SIGNIN_TYPE, SIGNIN_LOCATOR);
+        if (signInBtn == null) {
+            AllureLogger.failStep("Sign In button not found", new Exception("Sign In button is null"));
+            return;
+        }
+        signInBtn.click();
+        AllureLogger.passStep("Clicked Sign In successfully");
+
+        AllureLogger.passStep("✅ Login process completed successfully");
     }
 }

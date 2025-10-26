@@ -1,6 +1,7 @@
 package Utils;
 
 import Driver.Driver;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,9 +13,8 @@ public class InitializeBrowser {
 
     private static WebDriver driver;
 
-    // Private constructor to prevent instantiation
-    private InitializeBrowser() {
-    }
+    // 🛑 Private constructor to prevent instantiation
+    private InitializeBrowser() {}
 
     /**
      * Initialize WebDriver instance based on the browser name.
@@ -23,25 +23,47 @@ public class InitializeBrowser {
      * @return WebDriver instance
      */
     public static WebDriver getDriver(String browserName) {
-        if (driver == null) {
-            switch (browserName.toLowerCase()) {
-                case "chrome":
-                    driver = new ChromeDriver(BrowserHelpers.chromeOptions());
-                    break;
+        try {
+            if (driver == null) {
+                Allure.step("🚀 Launching browser: " + browserName);
+                System.out.println("🚀 Launching browser: " + browserName);
 
-                case "firefox":
-                    FirefoxOptions options = BrowserHelpers.firefoxOptions();
-                    driver = new FirefoxDriver(options);
-                    break;
+                switch (browserName.toLowerCase()) {
+                    case "chrome":
+                        driver = new ChromeDriver(BrowserHelpers.chromeOptions());
+                        Allure.step("✅ ChromeDriver initialized successfully");
+                        System.out.println("✅ ChromeDriver initialized successfully");
+                        break;
 
-                default:
-                    throw new IllegalArgumentException("Unsupported browser: " + browserName);
+                    case "firefox":
+                        FirefoxOptions options = BrowserHelpers.firefoxOptions();
+                        driver = new FirefoxDriver(options);
+                        Allure.step("✅ FirefoxDriver initialized successfully");
+                        System.out.println("✅ FirefoxDriver initialized successfully");
+                        break;
+
+                    default:
+                        Allure.step("❌ Unsupported browser: " + browserName);
+                        throw new IllegalArgumentException("Unsupported browser: " + browserName);
+                }
+
+                // 🔧 Basic setup
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+                driver.manage().window().maximize();
+
+                String appURL = XMLFileUtility.getURL();
+                driver.get(appURL);
+
+                Allure.step("🌐 Navigated to URL: " + appURL);
+                System.out.println("🌐 Navigated to URL: " + appURL);
+            } else {
+                Allure.step("♻️ Reusing existing WebDriver instance");
+                System.out.println("♻️ Reusing existing WebDriver instance");
             }
-
-            // Basic browser setup
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-            driver.manage().window().maximize();
-            driver.get(XMLFileUtility.getURL());
+        } catch (Exception e) {
+            Allure.step("❌ Failed to initialize browser: " + e.getMessage());
+            System.err.println("❌ Failed to initialize browser: " + e.getMessage());
+            e.printStackTrace();
         }
         return driver;
     }
@@ -51,6 +73,7 @@ public class InitializeBrowser {
      */
     public static WebDriver returnDriver() {
         if (driver == null) {
+            Allure.step("⚠️ Attempted to access driver before initialization");
             throw new IllegalStateException("Driver not initialized. Call getDriver() first.");
         }
         return driver;
@@ -60,9 +83,18 @@ public class InitializeBrowser {
      * Cleanly close and quit the WebDriver instance.
      */
     public static void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
+        try {
+            if (driver != null) {
+                Allure.step("🧹 Closing browser and quitting WebDriver...");
+                System.out.println("🧹 Closing browser and quitting WebDriver...");
+                driver.quit();
+                driver = null;
+                Allure.step("✅ WebDriver closed successfully");
+                System.out.println("✅ WebDriver closed successfully");
+            }
+        } catch (Exception e) {
+            Allure.step("❌ Error while quitting WebDriver: " + e.getMessage());
+            System.err.println("❌ Error while quitting WebDriver: " + e.getMessage());
         }
     }
 }

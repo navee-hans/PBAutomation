@@ -2,12 +2,12 @@ package PageObjects.Pages;
 
 import PageObjects.Locators.Locators;
 import PageObjects.models.LocatorsType;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class DashboardPage extends Pages {
 
-    // Use the correct locator for Skip button — assuming it's in Locators.DashboardPage
     private final LocatorsType skipButtonLocatorType = LocatorsType.ByXpath;
     private final String skipButtonLocatorValue = Locators.DashboardPage.SkipButtonByXPATH;
 
@@ -15,24 +15,31 @@ public class DashboardPage extends Pages {
         super(driver);
     }
 
-    // Method to verify if Skip button is displayed
+    // ✅ Verify if Skip button is displayed
     public boolean isSkipButtonDisplayed() {
+        Allure.step("Verifying if Skip button is displayed on Dashboard");
         try {
             WebElement skipButton = wait.untilElementClickable(skipButtonLocatorType, skipButtonLocatorValue);
-            return skipButton.isDisplayed();
+            boolean displayed = skipButton.isDisplayed();
+            Allure.step("Skip button display status: " + displayed);
+            return displayed;
         } catch (Exception e) {
-            System.out.println("Skip button not found or not visible: " + e.getMessage());
+            Allure.step("❌ Skip button not found or not visible: " + e.getMessage());
+            System.err.println("Skip button not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
-    // Optional method to click Skip button safely
+    // ✅ Click Skip button safely
     public void clickSkipButton() {
+        Allure.step("Attempting to click Skip button on Dashboard");
         try {
             WebElement skipButton = wait.untilElementClickable(skipButtonLocatorType, skipButtonLocatorValue);
             skipButton.click();
+            Allure.step("✅ Clicked Skip button successfully.");
             System.out.println("Clicked Skip button successfully.");
         } catch (Exception e) {
+            Allure.step("❌ Failed to click Skip button: " + e.getMessage());
             System.err.println("Failed to click Skip button: " + e.getMessage());
         }
     }
