@@ -15,7 +15,7 @@ import java.util.Map;
 public class Login_Steps {
 
     @Given("I login with {string}")
-    public void iLoginWith(String role) {
+    public void i_Login_With(String role) {
         Map<String, String> user = XMLFileUtility.getUsers(role);
         LoginPage loginPage = new LoginPage(InitializeBrowser.returnDriver());
 
@@ -39,7 +39,7 @@ public class Login_Steps {
     }
 
     @Then("I verify user navigate to {string} Dashboard")
-    public void i_verify_user_navigate_to_homescreen(String role) {
+    public void i_Verify_User_Navigate_To_Homescreen(String role) {
         DashboardPage dashBoardPage = new DashboardPage(InitializeBrowser.returnDriver());
 
         Allure.step("Verifying dashboard for role: " + role, () -> {
