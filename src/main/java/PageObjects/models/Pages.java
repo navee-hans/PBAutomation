@@ -2,5 +2,6 @@ package PageObjects.models;
 
 public enum Pages {
     LoginPage,
-    DashboardPage
+    DashboardPage,
+    AdministratorPage
 }

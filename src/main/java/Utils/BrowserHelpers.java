@@ -16,6 +16,10 @@ public class BrowserHelpers {
         chromeOptions.addArguments("--start-maximized");
         chromeOptions.addArguments("--disable-extensions");
         chromeOptions.addArguments("--disable-popup-blocking");
+        chromeOptions.addArguments("--headless=new");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.addArguments("--disable-gpu");
         return chromeOptions;
     }
 

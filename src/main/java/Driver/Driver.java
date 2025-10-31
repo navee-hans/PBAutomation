@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Driver {
 
-    private final WebDriver driver;
+    private WebDriver driver;
 
     // ✅ Constructor - makes driver instance final (no shared static)
     public Driver(WebDriver driver) {
@@ -18,7 +18,7 @@ public class Driver {
     }
 
     // ✅ Unified private method to get By object based on LocatorsType
-    private By getBy(LocatorsType locatorType, String locator) {
+    protected By getBy(LocatorsType locatorType, String locator) {
         Allure.step("🧭 Locating element using: " + locatorType + " = " + locator);
         switch (locatorType) {
             case ByXpath:

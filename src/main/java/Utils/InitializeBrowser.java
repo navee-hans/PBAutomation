@@ -11,10 +11,7 @@ import java.time.Duration;
 
 public class InitializeBrowser {
 
-    private static WebDriver driver;
-
-    // 🛑 Private constructor to prevent instantiation
-    private InitializeBrowser() {}
+    private WebDriver driver;
 
     /**
      * Initialize WebDriver instance based on the browser name.
@@ -22,7 +19,7 @@ public class InitializeBrowser {
      * @param browserName the name of the browser (e.g., "Chrome" or "Firefox")
      * @return WebDriver instance
      */
-    public static WebDriver getDriver(String browserName) {
+    public WebDriver getDriver(String browserName) {
         try {
             if (driver == null) {
                 Allure.step("🚀 Launching browser: " + browserName);
@@ -71,7 +68,7 @@ public class InitializeBrowser {
     /**
      * Return existing WebDriver instance.
      */
-    public static WebDriver returnDriver() {
+    public WebDriver returnDriver() {
         if (driver == null) {
             Allure.step("⚠️ Attempted to access driver before initialization");
             throw new IllegalStateException("Driver not initialized. Call getDriver() first.");
@@ -82,7 +79,7 @@ public class InitializeBrowser {
     /**
      * Cleanly close and quit the WebDriver instance.
      */
-    public static void quitDriver() {
+    public void quitDriver() {
         try {
             if (driver != null) {
                 Allure.step("🧹 Closing browser and quitting WebDriver...");

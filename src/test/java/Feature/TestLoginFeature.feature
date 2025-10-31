@@ -6,6 +6,7 @@ Feature: TestLoginFeature
     Given I login with "<User Type>"
     Then I verify user navigate to "<User>" Dashboard
     Examples:
-      | User Type  | User  |
-      | Admin User | Admin |
-      | Guest User | Guest |
+      | User Type     | User           |
+      | Admin User    | Administration |
+      | Guest User    | Guest          |
+      | Operator User | Operator       |

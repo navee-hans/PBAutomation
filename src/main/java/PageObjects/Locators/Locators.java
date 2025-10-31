@@ -18,4 +18,14 @@ public class Locators {
 
     }
 
+    public static class AdministratorPage{
+        public static String menuLinkXpath(String linkText) {
+            return String.format("//span[normalize-space(text())='%s']", linkText);
+        }
+    }
+
+    public static class ScenariosPage{
+        public static String CreateNewScenarioButtonByID =  "createnewscenario";
+    }
+
 }

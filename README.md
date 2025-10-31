@@ -62,7 +62,7 @@ This is a **Cucumber + Java Selenium automation framework** designed for robust,
 
 ---
 
-## Setup Instructions
+## Windows Setup Instructions
 
 1. **Clone the repository**
 
@@ -80,9 +80,47 @@ cd <your-project-folder>
 4. **Configure test environment**
  - Update EnvironmentConstants.xml with URLs, usernames, passwords, etc.
 
-5. **Run tests**
- - Using Maven:
-   - mvn test
+
+## Linux Installation
+**Steps to deploy automation project on linux machine**:
+  **Install Java**:
+   - sudo apt update 
+   - sudo apt install openjdk-17-jdk -y 
+   - java -version
+
+  **Install Maven**:
+   - sudo apt install maven -y 
+   - mvn -v
+ 
+ **Clone Your Project**
+   - git clone https://github.com/navee-hans/PBAutomation.git
+
+  - cd your-repo-name 
+
+ **Install Chrome browser**
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
+ **Verify installation**
+  - google-chrome --version
+ **Allure report setup on linux** 
+  - Go to your home or tools directory (optional)
+   - cd ~
+   - mkdir -p tools && cd tools
+   - wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.34.1/allure-commandline-2.34.1.zip
+   - unzip allure-commandline-2.34.1.zip 
+   - mv allure-commandline-2.34.1 allure 
+   - Make it globally accessible (optional but recommended)
+    - sudo mv allure /opt/allure 
+   - Create a symbolic link to run it from anywhere
+    - sudo ln -s /opt/allure/bin/allure /usr/bin/allure 
+   - Verify installation
+    - allure --version
+
+**Run test cases with reports generation**
+ - mvn clean test && allure generate allure-results --clean -o target/allure-report
+**Run test cases without report**
+  - mvn clean test
     
 **Features**
 

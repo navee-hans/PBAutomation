@@ -4,12 +4,17 @@
     <URL>https://test.pbweb.info/MicrosoftIdentity/Account/SignIn</URL>
     <Users>
         <User>
-            <Role>Admin User</Role>
+            <Role>Operator User</Role>
             <Username>hansnavee1502@gmail.com</Username>
             <Password>nh18Apr!</Password>
         </User>
         <User>
             <Role>Guest User</Role>
+            <Username>pbtest1@yopmail.com</Username>
+            <Password>nh18Apr!</Password>
+        </User>
+        <User>
+            <Role>Admin User</Role>
             <Username>naveehans@gmail.com</Username>
             <Password>nh18Apr!</Password>
         </User>
